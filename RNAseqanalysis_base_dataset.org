@@ -195,7 +195,7 @@ print(pc1.2)
 #+END_SRC
 
 #+RESULTS:
-[[file:./DATA/normout021215/DATA/pcaplot1.jpg]]
+[[file:./DATA/normout021215/DATA/pcaplot1a.jpg]]
 
 
 ** Figure 3: 3D scatterplot of unscaled PCA
