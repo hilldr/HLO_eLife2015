@@ -209,7 +209,7 @@ scatterplot3d(scores$PC1,scores$PC2,scores$PC3,bg=scores$color,pch=21,grid=TRUE,
 
 ** Figure 4: Hierarchical cluster analysis of FPKM matrix in all samples 
 
-#+begin_src R :session *R* :exports results :results graphics :file ./DATA/normout021215/DATA/pvclust1.jpg :height 400 :width 600
+#+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pvclust1.jpg :height 400 :width 600
 # outsourced to debian server as pvclust1.r
 library(pvclust)
 result <- pvclust(pca.data,method.dist="canberra",method.hclust="complete",nboot=10000)
