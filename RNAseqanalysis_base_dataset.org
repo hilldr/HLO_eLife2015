@@ -189,7 +189,7 @@ multiplot(pc1.2,pc1.3,pc2.3,cols=3)
 #+RESULTS:
 [[file:./DATA/normout021215/DATA/pcaplot1.jpg]]
 
-#+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pcaplot1.jpg :width 650 :height 600
+#+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pcaplot1a.jpg :width 650 :height 600
 print(pc1.2)
 
 #+END_SRC
