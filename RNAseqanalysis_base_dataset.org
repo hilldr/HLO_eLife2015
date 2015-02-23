@@ -21,7 +21,7 @@ Hierarchical cluster analysis based on the Canberra distance \citep{Lance:1966} 
 
 ** Results 
 
-* Figures: Whole dataset
+* Figures
 #+begin_src R :session *R* :exports both
 # Multiple plot function
 #
@@ -79,7 +79,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 #+RESULTS:
 
 
-** Figure 1: Principle component analysis of RAW FPKM matrix
+** Principle component analysis of FPKM matrix
 #+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pcaplot.jpg :width 2150 :height 600
 
 
@@ -122,40 +122,7 @@ rownames(data.n) <- make.names(data.n$gene_short_name,unique=TRUE)
 data.n <-data.n[,sapply(data.n,is.numeric)]
 #pca.data <- num.data[,-st]
 
-pca <- prcomp(t(pca.data),scale=TRUE,center=TRUE,na.action=na.omit)
 
-scores <- data.frame(colnames(pca.data), pca$x[,1:ncol(pca$x)],group)
-scores$color <- c("#377EB8","#377EB8","#377EB8","#E41A1C","#E41A1C","#E41A1C","#984EA3","#984EA3","#984EA3","#984EA3","#984EA3","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#4DAF4A","#FF7F00","#FF7F00","#FF7F00","#FF7F00","#FF7F00","#FF7F00")
-#scores <- subset(scores, scores$colnames != "SI.F_0")
-
-library(ggplot2)
-theme <- theme(legend.position="right",legend.title=element_blank(),legend.background = element_rect(fill="white", size=.5, linetype="dotted"),panel.grid.minor=element_blank(), panel.grid.major=element_blank())
-
-pc1.2 <- qplot(x=PC1, y=PC2, data=scores) + theme + 
- # scale_fill_brewer(palette="Set3")+
-  scale_fill_manual(values = colorRampPalette(brewer.pal(length(unique(scores$group)), "Set1"))(length(unique(scores$group)))) +
-  geom_point(shape=21,aes(fill=factor(group)), size=8)  
-
-pc1.3 <- qplot(x=PC1, y=PC3, data=scores) + theme +
- # scale_fill_brewer(palette="Set3")+
-  scale_fill_manual(values = colorRampPalette(brewer.pal(length(unique(scores$group)), "Set1"))(length(unique(scores$group)))) +
-  geom_point(shape=21,aes(fill=factor(group)), size=8) 
-
-pc2.3 <- qplot(x=PC2, y=PC3, data=scores) + theme +
-  #scale_fill_brewer(palette="Set3")+
-  scale_fill_manual(values = colorRampPalette(brewer.pal(length(unique(scores$group)), "Set1"))(length(unique(scores$group)))) +
-  geom_point(shape=21,aes(fill=factor(group)), size=8) 
-
-multiplot(pc1.2,pc1.3,pc2.3,cols=3)
-
-#+END_SRC
-#+NAME: pcaplot1 
-#+CAPTION: Principle component analysis of total FPKM.
-#+RESULTS:
-[[file:./DATA/normout021215/DATA/pcaplot.jpg]]
-
-** Figure 2: Unscaled PCA plot
-#+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pcaplot1.jpg :width 2150 :height 600
 
 pca <- prcomp(t(num.data),scale=FALSE,center=TRUE,na.action=na.omit)
 
@@ -187,7 +154,7 @@ multiplot(pc1.2,pc1.3,pc2.3,cols=3)
 #+NAME: pcaplot1a
 #+CAPTION: Principle component analysis of total FPKM.PCA1 x PCA2 only.
 #+RESULTS:
-[[file:./DATA/normout021215/DATA/pcaplot1.jpg]]
+[[file:./DATA/normout021215/DATA/pcaplot.jpg]]
 
 #+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pcaplot1a.jpg :width 650 :height 600
 print(pc1.2)
@@ -198,7 +165,7 @@ print(pc1.2)
 [[file:./DATA/normout021215/DATA/pcaplot1a.jpg]]
 
 
-** Figure 3: 3D scatterplot of unscaled PCA
+** 3D scatterplot of unscaled PCA
 #+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/3Dpcaplot1.jpg :width 600 :height 600
 library(scatterplot3d)
 scatterplot3d(scores$PC1,scores$PC2,scores$PC3,bg=scores$color,pch=21,grid=TRUE,angle=45,axis=TRUE,cex.symbols=3,xlab="PC1",ylab="PC2",zlab="PC3",lty.axis=1,lty.hide=2,lty.hplot=2,label.tick.marks=FALSE)
@@ -207,7 +174,7 @@ scatterplot3d(scores$PC1,scores$PC2,scores$PC3,bg=scores$color,pch=21,grid=TRUE,
 #+RESULTS:
 [[file:./DATA/normout021215/DATA/3Dpcaplot1.jpg]]
 
-** Figure 4: Hierarchical cluster analysis of FPKM matrix in all samples 
+** Hierarchical cluster analysis of FPKM matrix
 
 #+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/pvclust1.jpg :height 400 :width 600
 # outsourced to debian server as pvclust1.r
@@ -223,7 +190,7 @@ print(plot(result,hang=-1,float=0.008,cex.pv=0.3,font.pv=4,print.num=FALSE,print
 #+RESULTS:
 [[file:./DATA/normout021215/DATA/pvclust1.jpg]]
 
-** Figure 5: Gene expression correlation matrix
+** Gene expression correlation matrix
 #+begin_src R :session *R* :exports both :results graphics :file ./DATA/normout021215/DATA/corrmatrix1.jpg :width 717 :height 600 
 
 cor1 <- cor(pca.data,method="spearman")
